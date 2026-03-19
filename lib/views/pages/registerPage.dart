@@ -1,4 +1,6 @@
 import 'package:aprenderplus/data/constants.dart';
+import 'package:aprenderplus/views/pages/registerImage_page.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class Registerpage extends StatefulWidget {
@@ -31,12 +33,12 @@ class _RegisterpageState extends State<Registerpage> {
       body: SafeArea(
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: altura * 0.20,
+              Expanded(
+                flex: 3,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset('assets/images/logo.png'),
                     Text(
@@ -46,10 +48,10 @@ class _RegisterpageState extends State<Registerpage> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: altura * 0.45,
+              Expanded(
+                flex: 5,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                       flex: 1,
@@ -132,27 +134,34 @@ class _RegisterpageState extends State<Registerpage> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: altura * 0.15,
+              Expanded(
+                flex: 2,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
                       'Força da senha',
                       style: TextStyle(fontSize: 12, color: AppColors().texts),
                     ),
-                    FractionallySizedBox(
-                      widthFactor: 0.8,
-                      heightFactor: 0.1,
+                    SizedBox(
+                      width: largura * 0.7,
+                      height: 10,
                       child: Container(color: Colors.grey),
                     ),
-                    FractionallySizedBox(
-                      heightFactor: 0.3,
-                      widthFactor: 0.8,
+                    SizedBox(
+                      width: largura * 0.8,
+                      height: 40,
                       child: FilledButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            return RegisterimagePage();
+                          }));
+                        },
                         style: FilledButton.styleFrom(
                           backgroundColor: Colors.grey,
+                          shape: ContinuousRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.zero,
+                          ),
                         ),
                         child: Text(
                           'Registrar',
