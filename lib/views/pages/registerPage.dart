@@ -1,4 +1,5 @@
 import 'package:aprenderplus/data/constants.dart';
+import 'package:aprenderplus/data/notifiers.dart';
 import 'package:aprenderplus/views/pages/registerImage_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -103,15 +104,31 @@ class _RegisterpageState extends State<Registerpage> {
                       flex: 1,
                       child: FractionallySizedBox(
                         widthFactor: 0.9,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.zero,
-                            ),
-                            fillColor: Colors.black,
-                            hintText: 'Digite sua senha',
-                            suffixIcon: Icon(Icons.visibility_off),
-                          ),
+                        child: ValueListenableBuilder(
+                          valueListenable: obscureNotifier,
+                          builder: (context, isObscure, child) {
+                            return TextField(
+                              obscureText: isObscure,
+                              obscuringCharacter: '*',
+                              decoration: InputDecoration(
+                                hintText: 'Digite sua senha',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.zero,
+                                ),
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    obscureNotifier.value =
+                                        !obscureNotifier.value;
+                                  },
+                                  icon: Icon(
+                                    isObscure
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),
@@ -119,15 +136,31 @@ class _RegisterpageState extends State<Registerpage> {
                       flex: 1,
                       child: FractionallySizedBox(
                         widthFactor: 0.9,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.zero,
-                            ),
-                            fillColor: Colors.black,
-                            hintText: 'Repita a senha',
-                            suffixIcon: Icon(Icons.visibility_off),
-                          ),
+                        child: ValueListenableBuilder(
+                          valueListenable: obscureNotifier,
+                          builder: (context, isObscure, child) {
+                            return TextField(
+                              obscureText: isObscure,
+                              obscuringCharacter: '*',
+                              decoration: InputDecoration(
+                                hintText: 'Digite sua senha',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.zero,
+                                ),
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    obscureNotifier.value =
+                                        !obscureNotifier.value;
+                                  },
+                                  icon: Icon(
+                                    isObscure
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),
@@ -153,9 +186,14 @@ class _RegisterpageState extends State<Registerpage> {
                       height: 40,
                       child: FilledButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) {
-                            return RegisterimagePage();
-                          }));
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return RegisterimagePage();
+                              },
+                            ),
+                          );
                         },
                         style: FilledButton.styleFrom(
                           backgroundColor: Colors.grey,
